@@ -1,0 +1,43 @@
+Note: windows users may not see line breaks; try opening this file in jGrasp/DrJava/Eclipse/Etc
+
+* Definitions
+- =X=: The =DenseMatrix= whose methods are being called
+- =M=: Number of rows in =X=
+- =N=: Number of columns in =X=
+- =I,J=: Index of an object being added/removed for the
+  =insert/get/set= methods.
+
+Analyze the following methods
+
+* insertRow(I): O(M + N)
+  
+  We need to assign every single element in a row, which takes place N times.
+  In order to shift the elements, it takes place M times.
+  So there are two parallel loops, which derives the O(M+N).
+  
+* insertColumn(J): O(M * N)
+  
+ There is a nested loop, to go over each single element in the matrix.
+ The outside loop runs M times, while the inner loop runs N times. 
+ It totally is M*N times.
+  
+* get(I,J): O(1)
+  
+  There is no loops in this function, because we just specify one element we need to retrive and we don't need any loops.
+  As a result, it is constant, so it is O(1).
+  
+  * set(I,J,e): O(I+J)
+  
+  Because there are two parallel loops which add the row and colmun if there is not enough space.
+  The first one runs I times, while the second one runs J times.
+  As a result, it is O(I+J).
+
+  * Runtime complexity of transpose(): O(M*N)
+  
+  Because there is a nested loop, which goes over each single element of the matrix.
+  There are M rows and N column, so the loops run M*N times.
+
+  * Space complexity of transpose(): O(M*N)
+  
+  We can create a new N by M matrix to store the value of the old matrix.
+  This process takes N*M memories, so it is O(M*N).

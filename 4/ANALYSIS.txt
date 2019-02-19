@@ -1,0 +1,74 @@
+Answer the following questions about the performance of your TopKWords
+program.  Give sample timings to support your observations in
+questions where runtime performance is the focus.
+
+1. Give a big-O complexity estimate for word-counting using trees and
+   using hash tables.
+   
+    trees: O(log(n))
+    
+    hash tables: average case: O(1); worst case: O(n)
+
+2. Compare the runtimes for hash- vs tree-based word counting on
+   different sized inputs. Indicate whether runtimes support your big-O
+   estimates.
+   
+    input 1: data\Dante-s-Inferno.txt 20 hash/tree pq data\mysql-stopwords.txt
+   		trees: 1214 word count time
+   		hash tables: 1001 word count time
+   		
+   	input 2: data\fruits.txt 10 hash/tree pq data\citrus-fruits.txt
+   		trees: 16 word count time
+   		hash tables: 15 word count time
+   		
+   	input 3: data\fruits-1-10.txt 300 hash/tree pq data\citrus-fruits.txt
+   		trees: 13 word count time
+   		hash tables: 13 word count time
+    
+    It supports the big-O estimates because hash table is faster.
+   
+3. Give a big-O complexity estimate for top-K word calculation using
+   full array sorting and using priority queues.
+
+    	array: average: sorting: O(nlog(n))
+                        printing: O(n^2)    	
+                        
+    	priority queues: sorting: O(nlog(n)) 
+    	                 it will sort automatically when the data is added
+                         printing: O(n^2)
+   
+4. Compare the runtimes for PQ- vs full-sorting-based top-k calculation
+   on different sized inputs.  Indicate whether runtimes support your big-O
+   estimates. 
+   
+    input 1: data\Dnte-s-Inferno.txt 20 hash pq/fullsort data\mysql-stopwords.txt
+   		array: 153 topk time
+   		pq: 104 topk time
+   		
+    input 2:  data\fruits.txt 3 tree pq/fullsort data\citrus-fruits.txt
+   		array: 3 topk time
+   		pq: 3 topk time
+   		
+   	input 3: data\fruits-1-10.txt 300 tree pq/fullsort data\citrus-fruits.txt
+   		array: 3 topk time
+   		pq: 4 topk time
+   		
+	it supports my big-O estimates. When there are few numbers, array does a better job. 
+	When there are more numbers, pq is better. 
+
+5. Analyze the total rutimes for different sizes of inputs and describe
+   which program options affect overall performance most dramatically.
+   
+    input 1: data\Dante-s-Inferno.txt 20 hash pq data\mysql-stopwords.txt
+   		total time: 1375
+   		
+    input 2: data\Dante-s-Inferno.txt 20 hash fullsort data\mysql-stopwords.txt
+   		total time: 1390
+   		
+    input 3: data\Dante-s-Inferno.txt 20 tree fullsort data\mysql-stopwords.txt
+   		total time: 1853
+   		    
+   	input 4: data\Dante-s-Inferno.txt 20 tree pq data\mysql-stopwords.txt
+   		total time: 1540
+   		
+   	Tree fullsort increase the time deamatically, while hash pq is the best case.	

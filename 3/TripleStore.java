@@ -1,0 +1,152 @@
+import java.util.*;
+
+public class TripleStore{
+  
+  private String wildcard;
+  private TreeSet<Record> treeERP;
+  private TreeSet<Record> treeRPE;
+  private TreeSet<Record> treePER;
+  
+  //Create a TripleStore. Initialize any trees you will use in the constructor. 
+  //Make sure to pass in relevant arguments to the tree constructors such as Comparators.
+  public TripleStore(){
+    wildcard="*";
+    this.treeERP = new TreeSet<Record>(Record.ERPCompare);
+    this.treeRPE = new TreeSet<Record>(Record.RPECompare);
+    this.treePER = new TreeSet<Record>(Record.PERCompare);
+  }
+  
+  //These class methods allow the current wild card to be inspected and changed.
+  //The default wild card is required to be the asterisk character *
+  public String getWildCard(){
+    return wildcard;
+  }
+  
+  public void setWildCard(String w){
+    wildcard=w;
+  }
+  
+  //Create a string representation of the TripleStore suitable for printing. 
+  //This should be done by building a String containing the results of each Record.toString() 
+  //which is currently stored and separating these with a newline. Proper implenetation of 3 is 
+  //essential for TripleStore.toString().
+  public String toString(){
+  String tmp = new String();
+  Record current;
+  Iterator<Record> k=treeERP.iterator();
+  while(k.hasNext()){
+    current=k.next();
+    tmp=tmp+current.toString()+"\n";
+  }
+  return tmp;
+  }
+  
+  //Add a single record into the TripleStore.
+  public boolean add(String entity, String relation, String property){
+     if(entity.equals(wildcard)||relation.equals(wildcard)||property.equals(wildcard))
+      throw new IllegalArgumentException();
+    Record newrecord=new Record(entity,relation,property);
+    if(treeERP.add(newrecord)&&treeRPE.add(newrecord)&&treePER.add(newrecord))
+      return true;
+    else 
+      return false;
+  }
+  
+  //Return an ArrayList of the records that match the given query parameters. 
+  //Any of the arguments entity,relation,property may be wild. 
+  //All records that match the query will be returned in an ArrayList.
+  public ArrayList<Record> query(String entity, String relation, String property){
+    ArrayList<Record> results= new ArrayList<Record>();
+    if((!entity.equals(wildcard))&&(!relation.equals(wildcard))&&(!property.equals(wildcard))){
+      Record r=Record.makeRecord(entity,relation,property);
+      if(treeERP.contains(r)||treeRPE.contains(r)||treePER.contains(r))
+      results.add(r);  
+    }
+    
+    else if(!entity.equals(wildcard)){
+      Record newr=Record.makeQuery(wildcard,entity,relation,property);
+      Set<Record> recordset=treeERP.tailSet(newr);
+      Iterator<Record> k=recordset.iterator();
+      //Iterator<Record> k=treeERP.tailSet(newr).iterator();
+      while(k.hasNext()){
+        Record current=k.next();
+        if(current.matches(newr)){
+          results.add(current);
+        }
+      }
+    }
+          
+    else if(!property.equals(wildcard)){
+      Record newr=Record.makeQuery(wildcard,entity,relation,property);
+      Set<Record> recordset=treeRPE.tailSet(newr);
+      Iterator<Record> k=recordset.iterator();
+      while(k.hasNext()){
+        Record current=k.next();
+        if(current.matches(newr)){
+          results.add(current);
+        }
+      }
+    }
+      
+    else{
+      Record newr=Record.makeQuery(wildcard,entity,relation,property);
+      Set<Record> recordset=treePER.tailSet(newr);
+      Iterator<Record> k=recordset.iterator();
+      while(k.hasNext()){
+        Record current=k.next();
+        if(current.matches(newr)){
+          results.add(current);
+        }
+      }  
+    }
+    return results;
+  }
+    
+  //Remove records from the TripleStore. 
+  //Any of the arguments entity,relation,property may be wild. 
+  //All records that match the parameters will be removed.
+  //
+  //
+  //I wrote query again
+  //
+  //
+  public int remove(String e, String r, String p){
+    int i = 0;
+    if((!e.equals(wildcard))&&(!r.equals(wildcard))&&(!p.equals(wildcard))){
+      Record r2=Record.makeRecord(e,r,p);
+      if(treeERP.contains(r2))
+        i++;
+      treeERP.remove(r2);
+      treeRPE.remove(r2);
+      treePER.remove(r2);
+      return i;
+     }
+    
+    ArrayList<Record> results= new ArrayList<Record>();
+    Record r2= Record.makeQuery(wildcard,e,r,p);
+    Set<Record> recordset;
+    if(!e.equals(wildcard)){
+      recordset=treeERP.tailSet(r2);
+    }
+    else if(!r.equals(wildcard)){
+      recordset=treeRPE.tailSet(r2);
+    }    
+    else{
+      recordset=treePER.tailSet(r2);
+    }
+    Iterator<Record> k=recordset.iterator();
+    while(k.hasNext()){
+      Record current=k.next();
+      if(current.matches(r2)){
+        i++;
+        results.add(current);
+      }
+    }
+    for( int j =0;j<results.size();j++){
+      treeERP.remove(results.get(j));
+      treeRPE.remove(results.get(j));
+      treePER.remove(results.get(j));
+    }
+    return i;
+  }  
+}

@@ -1,0 +1,44 @@
+* Data Files
+Data files for this project are provided in the directories =data=.
+They are described below.
+
+|------------------------+------------------------------------------------|
+| File                   | Notes                                          |
+|------------------------+------------------------------------------------|
+| STOP WORDS             | http://www.ranks.nl/stopwords                  |
+| default-stopwords.txt  | A list of common stop words                    |
+| mysql-stopwords.txt    | Stop words used in the MySQL database system   |
+| citrus-fruits.txt      | Fruit stop words for testing                   |
+|------------------------+------------------------------------------------|
+| FRUITS                 | Simple files for Testing                       |
+| fruits-1-10.txt        | contains fruits in order; each occurs in order |
+| fruits-1-10-random.txt | same as above but randomly ordere              |
+| fruits-odds.txt        | fruits in order with ties on odd numbers       |
+| fruits-odds-random.txt | same as above but randomly ordered             |
+|------------------------+------------------------------------------------|
+| LITERATURE             |                                                |
+|                        | http://www.abrahamlincolnonline.org/           |
+| gettysburg.txt         | Gettysburg Address, relatively short free-form |
+|                        |                                                |
+|                        | http://www.fulltextarchive.com                 |
+| The-Time-Machine.txt   | "The Time Machine", by H.G. Wells              |
+| Dante-s-Inferno.txt    | "Inferno", by f Dante Alighieri                |
+|                        | Translated by Henry Wadsworth Longfellow       |
+|------------------------+------------------------------------------------|
+| CRAFT FILES            | http://bionlp-corpora.sourceforge.net/CRAFT/   |
+| 11532192.txt           | Full text articles from Craft articles         |
+| 11597317.txt           | Biology and medicine journal articles          |
+| 11897010.txt           | 5 sample individual articles                   |
+| 12079497.txt           |                                                |
+| 12546709.txt           |                                                |
+|                        |                                                |
+| craft-05.txt           | 5 craft articles concatenated                  |
+| craft-10.txt           | 10 craft articles concatenated                 |
+| ..                     |                                                |
+| craft-60.txt           | 60 craft articles concatenated                 |
+| craft-65.txt           | 66 craft articles concatenated                 |
+|                        |                                                |
+| craft-67.txt           | All 67 craft articles concatenated             |
+| craft-134.txt          | craft-67.txt concatenated twice.               |
+|------------------------+------------------------------------------------|
+

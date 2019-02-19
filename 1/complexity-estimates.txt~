@@ -1,0 +1,29 @@
+Note: windows users may not see line breaks; try opening this file in jGrasp/DrJava/Eclipse/Etc
+
+* Definitions
+- =X=: The =DenseMatrix= whose methods are being called
+- =M=: Number of rows in =X=
+- =N=: Number of columns in =X=
+- =I,J=: Index of an object being added/removed for the
+  =insert/get/set= methods.
+
+Analyze the following methods
+
+* insertRow(I): O(M + N)
+  
+  We need to assign every single element in a row, which takes place N times.
+  In order to shift the elements, it takes place M times.
+  
+* insertColumn(J): O(M * N)
+  To shift the columns after J, it will do each single one, which is (N-J+1) columns times M rows.
+  To set each element in the matrix, we need to set each single one in one column which is M times.
+  
+* get(I,J): O(1)
+  It will add M-I rows until it has enough, which means it needs to do M-I times.
+  It will add N-J columns
+  
+* set(I,J,e)
+
+* Runtime complexity of transpose()
+
+* Space complexity of transpose()

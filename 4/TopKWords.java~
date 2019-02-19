@@ -1,0 +1,70 @@
+import java.util.*;
+
+
+public class TopKWords{
+  
+  Set<String> stopwords;
+  TreeMap<String, int> mtree;
+  HashMap<String, int> mhash;
+  Collection<int> vs;
+  
+  int num;
+  
+  
+  public getStopWords(String fname){
+    Set<String> words = new Set<String>;
+    WordStream ws = new WordStream(fname);
+    while(ws.hasWord()){
+      words.add(ws.nextWord());
+    }
+    stopwords=words;
+  }
+  
+  
+  public hashCount(String fname){
+    HashMap<String,int> hash= new HashMap<String, int>();
+    String word=new String();
+    WordStream ws= new WordStream(fname);
+    while(ws.hasWord()){
+      word=ws.nextWord();
+      if(stopwords.contains(word)){
+        continue;
+      }
+      else if(hash.containsKey(word)){
+        hash.put(word,hash.get(word)+1);
+      }
+      else{
+      hash.put(word,1);
+      }
+    }
+    mhash=hash;
+    vs=tree.values();
+  }
+    
+  
+  public treeCount(String fname){
+    TreeMap<String, int> tree= new TreeMap<String, int>();
+    String word=new String();
+    WordStream ws= new WordStream(fname);
+    while(ws.hasWord()){
+      word=ws.nextWord();
+      if(stopwords.contains(word)){
+        continue;
+      }
+      else if(tree.containsKey(word)){
+        tree.put(word,tree.get(word)+1);
+      }
+      else{
+      tree.put(word,1);
+      }
+    }
+    mtree=tree;
+    vs=tree.values();
+  }
+  
+  
+  public static void main(String args[]) throws Exception{
+  }
+  
+  
+}
